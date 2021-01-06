@@ -1,22 +1,25 @@
-const express = require('express');
-const webpack = require('webpack');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpackConfig = require('../../webpack.dev.js');
+var app = require('express')();
+var http = require('http').createServer(app);
+var io = require('socket.io')(http);
 
-// Setup an Express server
-const app = express();
-app.use(express.static('public'));
+var totalCookies = 0;
 
-if (process.env.NODE_ENV === 'development') {
-  // Setup Webpack for development
-  const compiler = webpack(webpackConfig);
-  app.use(webpackDevMiddleware(compiler));
-} else {
-  // Static serve the dist/ folder in production
-  app.use(express.static('dist'));
-}
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+});
 
-// Listen on port
-const port = process.env.PORT || 255;
-const server = app.listen(port);
-console.log(`Server listening on port ${port}`);
+io.on('connection', (socket) => {
+  console.log('a user connected');
+  io.emit('click', totalCookies);
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+  socket.on('click', () => {
+    socket.broadcast.emit('click', totalCookies);
+    totalCookies++;
+  });
+});
+
+http.listen(3000, () => {
+  console.log('listening on *:3000');
+});

@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <style>
+
+    .button {
+      background-color: #4CAF50;
+      transition-duration: 0.4s;
+      font-size:24px
+    }
+
+    .button:hover {
+      background-color: #ffffff;
+    }
+
+    </style>
+  </head>
+  <body>
+    <h1 id = "count">0 cookies created</h1>
+    <h2 id = "globalcount"> 0 cookies created globally </h2>
+    <button class = "button" id = "button" type = "submit">Click Me</button>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+    $(function () {
+        var socket = io();
+        var count = 0;
+        var globalcount = 0;
+        $('button').click(function(e) {
+            e.preventDefault(); // prevents page reloading
+            count++;
+            globalcount++;
+            $('#count').text(count + ' cookies created');
+            $('#globalcount').text(globalcount + ' cookies created globally');
+            socket.emit('click');
+            return false;
+        });
+        socket.on('click', function(num){
+          globalcount = num;
+          $('#globalcount').text(globalcount + ' cookies created globally');
+        });
+    });
+    </script>
+  </body>
+</html>
