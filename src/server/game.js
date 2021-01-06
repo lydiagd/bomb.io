@@ -1,4 +1,4 @@
-const Constants = require('../constants');
+const Constants = require('./constants');
 const Player = require('./player');
 
 class Game {
@@ -17,7 +17,7 @@ class Game {
     // Generate a position to start this player at.
     const x = Constants.MAP_SIZE * (0.25 + Math.random() * 0.5);
     const y = Constants.MAP_SIZE * (0.25 + Math.random() * 0.5);
-    this.players[socket.id] = new Player(socket.id, username, x, y);
+    this.players[socket.id] = new Player(socket.id, username, x, y); //create new player
   }
 
   removePlayer(socket) {

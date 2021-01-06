@@ -36,4 +36,15 @@ io.on('connection', socket => {
 // Setup the Game
 const game = new Game();
 
-//ADD GAME FUNCTIONS HERE
+//ADD GAME FUNCTIONS HERE - relate to buttons on html page
+function joinGame(username) {
+  game.addPlayer(this, username);
+}
+
+function handleInput(dir) {
+  game.handleInput(this, dir);
+}
+
+function onDisconnect() {
+  game.removePlayer(this);
+}
