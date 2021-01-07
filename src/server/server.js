@@ -1,6 +1,9 @@
 const express = require('express');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
+const socketio = require('socket.io');
+
+const Game = require('./game');
 const webpackConfig = require('../../webpack.dev.js');
 
 // Setup an Express server

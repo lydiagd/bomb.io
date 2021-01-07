@@ -1,3 +1,4 @@
+const ObjectClass = require('./object');
 const Constants = require('./constants');
 
 class Player extends ObjectClass {
