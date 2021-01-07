@@ -1,4 +1,4 @@
-
+import { getAsset } from './assets';
 import { getCurrentState } from './state';
 
 const Constants = require('../server/constants');
