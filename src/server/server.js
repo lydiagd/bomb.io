@@ -5,6 +5,7 @@ const socketio = require('socket.io');
 
 const Game = require('./game');
 const webpackConfig = require('../../webpack.dev.js');
+const Constants = require('./constants');
 
 // Setup an Express server
 const app = express();

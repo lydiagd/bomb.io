@@ -32,3 +32,5 @@ class Player extends ObjectClass {
     };
   }
 }
+
+module.exports = Player;

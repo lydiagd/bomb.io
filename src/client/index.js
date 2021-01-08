@@ -3,9 +3,9 @@ import { startRendering, stopRendering } from './render';
 import { startCapturingInput, stopCapturingInput } from './input';
 import { downloadAssets } from './assets';
 import { initState } from './state';
-import { setLeaderboardHidden } from './leaderboard';
+//import { setLeaderboardHidden } from './leaderboard';
 
-import './css/main.css';
+import './html/main.css';
 
 const playMenu = document.getElementById('play-menu');
 const playButton = document.getElementById('play-button');
@@ -24,6 +24,6 @@ Promise.all([
     initState();
     startCapturingInput();
     startRendering();
-    setLeaderboardHidden(false);
+    //setLeaderboardHidden(false);
   };
 });
