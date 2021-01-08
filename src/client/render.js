@@ -19,14 +19,14 @@ function render() {
   }
 
   // Draw background
-//   context.drawImage(
-//     getAsset('thanos_snapped_anna.png'),
-//     -PLAYER_RADIUS,
-//     -PLAYER_RADIUS,
-//     PLAYER_RADIUS * 2,
-//     PLAYER_RADIUS * 2,
-//   );
-//   context.restore();
+  context.drawImage(
+    getAsset('thanos_snapped_anna.png'),
+    -PLAYER_RADIUS,
+    -PLAYER_RADIUS,
+    PLAYER_RADIUS * 2,
+    PLAYER_RADIUS * 2,
+  );
+  context.restore();
 
   // Draw all players
   renderPlayer(me, me);
@@ -42,3 +42,24 @@ export function startRendering() {
 export function stopRendering() {
   clearInterval(renderInterval);
 }
+
+function renderPlayer(me, player) {
+    const { x, y } = player;
+    const canvasX = canvas.width / 2 + x - me.x;
+    const canvasY = canvas.height / 2 + y - me.y;
+  
+    // Draw ship
+    // context.save();
+    // context.translate(canvasX, canvasY);
+    // context.rotate(direction);
+    // context.drawImage(
+    //   getAsset('ship.svg'),
+    //   -PLAYER_RADIUS,
+    //   -PLAYER_RADIUS,
+    //   PLAYER_RADIUS * 2,
+    //   PLAYER_RADIUS * 2,
+    // );
+    // context.restore();
+  
+    
+  }
