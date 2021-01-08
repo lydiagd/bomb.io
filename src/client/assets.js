@@ -1,5 +1,6 @@
 const ASSET_NAMES = [
   //FILL WITH ASSET NAMES
+  'thanos_snapped_anna.png'
 ];
 
 const assets = {};

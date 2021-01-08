@@ -19,7 +19,14 @@ function render() {
   }
 
   // Draw background
-//   renderBackground(me.x, me.y);
+//   context.drawImage(
+//     getAsset('thanos_snapped_anna.png'),
+//     -PLAYER_RADIUS,
+//     -PLAYER_RADIUS,
+//     PLAYER_RADIUS * 2,
+//     PLAYER_RADIUS * 2,
+//   );
+//   context.restore();
 
   // Draw all players
   renderPlayer(me, me);
