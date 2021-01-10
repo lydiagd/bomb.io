@@ -25,9 +25,10 @@ class Game {
     delete this.players[socket.id];
   }
 
-  handleInput(socket, dir) {
+  handleInput(socket, xvar, yvar) { //or pass in some version of x and y
     if (this.players[socket.id]) {
-      this.players[socket.id].setDirection(dir);
+      this.players[socket.id].setX(xvar);
+      this.players[socket.id].setY(yvar);
     }
   }
 
