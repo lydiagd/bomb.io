@@ -24,13 +24,13 @@ class Player extends ObjectClass {
   }
 
 
-  // serializeForUpdate() {
-  //   return {
-  //     ...(super.serializeForUpdate()),
-  //     direction: this.direction,
-  //     hp: this.hp,
-  //   };
-  // }
+  serializeForUpdate() {
+    return {
+      ...(super.serializeForUpdate()),
+      x: this.x,
+      y: this.y,
+    };
+  }
 }
 
 module.exports = Player;
