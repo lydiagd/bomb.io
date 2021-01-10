@@ -13,24 +13,24 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 function render() {
-  const { me, others } = getCurrentState();
-  if (!me) {
-    return;
-  }
+  //const { me, others } = getCurrentState();
+  // if (!me) {
+  //   return;
+  // }
 
   // Draw background
   context.drawImage(
-    getAsset('thanos_snapped_anna.png'),
-    -PLAYER_RADIUS,
-    -PLAYER_RADIUS,
+    getAsset('char_one/Char.png'),
+    0,
+    0,
     PLAYER_RADIUS * 2,
     PLAYER_RADIUS * 2,
   );
   context.restore();
 
   // Draw all players
-  renderPlayer(me, me);
-  others.forEach(renderPlayer.bind(null, me));
+  //renderPlayer(me, me);
+  //others.forEach(renderPlayer.bind(null, me));
 }
 
 // ... Helper functions here excluded
