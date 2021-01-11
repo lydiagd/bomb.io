@@ -17,22 +17,25 @@ class Object {
     this.y = obj.y;
   }
 
-  distanceTo(object) {
-    const dx = this.x - object.x;
-    const dy = this.y - object.y;
-    return Math.sqrt(dx * dx + dy * dy);
-  }
+  // distanceTo(object) {
+  //   const dx = this.x - object.x;
+  //   const dy = this.y - object.y;
+  //   return Math.sqrt(dx * dx + dy * dy);
+  // }
 
   setX(xVal) {
-    this.x = xVal;
+    //console.log("updated x by " + xVal);
+    this.x += xVal;
   }
 
   setY(yVal) {
-  this.y = yVal;
+    //console.log("updated x by " + yVal);
+    this.y += yVal;
   }
 
 
   serializeForUpdate() {
+    //console.log("x:" + this.x + " y:" + this.y);
     return {
       id: this.id,
       x: this.x,

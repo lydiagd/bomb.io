@@ -25,10 +25,20 @@ class Game {
     delete this.players[socket.id];
   }
 
-  handleInput(socket, xvar, yvar) { //or pass in some version of x and y
+  handleInput(socket, dir) { //or pass in some version of x and y
     if (this.players[socket.id]) {
-      this.players[socket.id].setX(xvar);
-      this.players[socket.id].setY(yvar);
+      if(dir == 'up') {
+        this.players[socket.id].setY(-5);
+      }
+      else if (dir == 'down') {
+        this.players[socket.id].setY(5);
+      }
+      else if (dir == 'left') {
+        this.players[socket.id].setX(-5);
+      }
+      else if (dir == 'right') {
+        this.players[socket.id].setX(5);
+      }
     }
   }
 
@@ -53,10 +63,10 @@ class Game {
     Object.keys(this.sockets).forEach(playerID => {
       const socket = this.sockets[playerID];
       const player = this.players[playerID];
-      if (player.hp <= 0) {
-        socket.emit(Constants.MSG_TYPES.GAME_OVER);
-        this.removePlayer(socket);
-      }
+      // if (player.hp <= 0) {
+      //   socket.emit(Constants.MSG_TYPES.GAME_OVER);
+      //   this.removePlayer(socket);
+      // }
     });
 
     // Send a game update to each player every other time (LEADERBOARD)

@@ -13,16 +13,19 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 function render() {
-  //const { me, others } = getCurrentState();
-  // if (!me) {
-  //   return;
-  // }
+  const { me, others } = getCurrentState();
+  if (!me) {
+    console.log('Could not get me from server');
+    return;
+  }
+
+  console.log('my character is at ' + me.x + ' and ' + me.y);
 
   // Draw background
   context.drawImage(
     getAsset('char_one/Char.png'),
-    0,
-    0,
+    me.x,
+    me.y,
     PLAYER_RADIUS * 2,
     PLAYER_RADIUS * 2,
   );

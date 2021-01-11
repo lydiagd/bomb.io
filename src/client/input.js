@@ -7,23 +7,24 @@
 //   const touch = e.touches[0];
 //   handleInput(touch.clientX, touch.clientY);
 // }
+import { updateDirection } from './networking'
 
 function onKeyDown(e) //https://developer.mozilla.org/en-US/docs/Web/API/Document/keypress_event
 {
     // Detect which key was pressed - refer to keycodes https://keycode.info/
     if( e.key == 'w' ) //W
-        handleInput(e.clientX, e.clientY);
+        handleInput('up');
     else if (e.key == 'a') //A
-        handleInput(e.clientX, e.clientY);
+        handleInput('left');
     else if (e.key == 's') //S
-        handleInput(e.clientX, e.clientY);
+        handleInput('down');
     else if (e.key == 'd')
-        handleInput(e.clientX, e.clientY);
+        handleInput('right');
 }
 
-function handleInput(x, y) {
+function handleInput(dir) {
   // const dir = Math.atan2(x - window.innerWidth / 2, window.innerHeight / 2 - y);
-  // updateDirection(dir);
+  updateDirection(dir);
   //CALL FUNCTION FROM NETWORKING JS TO SEND TO SERVER
 }
 
