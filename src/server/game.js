@@ -60,23 +60,23 @@ class Game {
     });
 
     // Send a game update to each player every other time (LEADERBOARD)
-  //   if (this.shouldSendUpdate) {
-  //     const leaderboard = this.getLeaderboard();
-  //     Object.keys(this.sockets).forEach(playerID => {
-  //       const socket = this.sockets[playerID];
-  //       const player = this.players[playerID];
-  //       socket.emit(
-  //         Constants.MSG_TYPES.GAME_UPDATE,
-  //         this.createUpdate(player, leaderboard),
-  //       );
-  //     });
-  //     this.shouldSendUpdate = false;
-  //   } else {
-  //     this.shouldSendUpdate = true;
-  //   }
-  // }
-
+    if (this.shouldSendUpdate) {
+      // const leaderboard = this.getLeaderboard();
+      Object.keys(this.sockets).forEach(playerID => {
+        const socket = this.sockets[playerID];
+        const player = this.players[playerID];
+        socket.emit(
+          Constants.MSG_TYPES.GAME_UPDATE,
+          this.createUpdate(player, null),//fill null with leaderboard
+        );
+      });
+      this.shouldSendUpdate = false;
+    } else {
+      this.shouldSendUpdate = true;
+    }
   }
+
+  // }
 //END UPDATE()
 
   // getLeaderboard() {

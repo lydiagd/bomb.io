@@ -27,8 +27,8 @@ class Player extends ObjectClass {
   serializeForUpdate() {
     return {
       ...(super.serializeForUpdate()),
-      x: this.x,
-      y: this.y,
+      // x: this.x,
+      // y: this.y,
     };
   }
 }
