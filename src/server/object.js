@@ -1,10 +1,9 @@
 class Object {
-  constructor(id, x, y, dir, speed) {
+  constructor(id, x, y) {
+    console.log("Object was created at " + x + " " + y);
     this.id = id;
     this.x = x;
     this.y = y;
-    this.direction = dir;
-    this.speed = speed;
   }
 
   // update(dt) {
@@ -22,15 +21,22 @@ class Object {
   //   const dy = this.y - object.y;
   //   return Math.sqrt(dx * dx + dy * dy);
   // }
+  getX() {
+    return this.x;
+  }
+
+  getY() {
+    return this.y;
+  }
 
   setX(xVal) {
     //console.log("updated x by " + xVal);
-    this.x += xVal;
+    this.x = xVal;
   }
 
   setY(yVal) {
     //console.log("updated x by " + yVal);
-    this.y += yVal;
+    this.y = yVal;
   }
 
 
@@ -41,6 +47,10 @@ class Object {
       x: this.x,
       y: this.y,
     };
+  }
+
+  toString() {
+    return "" + this.id + " x:" + this.x + " y:" + this.y;
   }
 }
 

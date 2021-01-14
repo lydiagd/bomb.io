@@ -25,19 +25,11 @@ class Game {
     delete this.players[socket.id];
   }
 
-  handleInput(socket, dir) { //or pass in some version of x and y
+  handleInput(socket, idle, dir) { //or pass in some version of x and y
     if (this.players[socket.id]) {
-      if(dir == 'up') {
-        this.players[socket.id].setY(-5);
-      }
-      else if (dir == 'down') {
-        this.players[socket.id].setY(5);
-      }
-      else if (dir == 'left') {
-        this.players[socket.id].setX(-5);
-      }
-      else if (dir == 'right') {
-        this.players[socket.id].setX(5);
+      this.players[socket.id].setIdle(idle);
+      if(!idle) {
+        this.players[socket.id].setDirection(dir);
       }
     }
   }
@@ -54,9 +46,11 @@ class Game {
 
     // Update each player
     Object.keys(this.sockets).forEach(playerID => {
-      const player = this.players[playerID];
+      
+      this.players[playerID].update(dt);
 
       //ENTER CODE NEEDED TO UPDATE EACH PLAYER
+      //player.update(dt);
     });
 
     // Check if any players are dead

@@ -1,6 +1,9 @@
 const ASSET_NAMES = [
   //FILL WITH ASSET NAMES
-  'char_one/Char.png'
+  'char_one/Char_down.png',
+  'char_one/Char_up.png',
+  'char_one/Char_right.png',
+  'char_one/Char_left.png'
 ];
 
 const assets = {};
