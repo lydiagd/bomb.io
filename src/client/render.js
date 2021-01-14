@@ -58,7 +58,7 @@ function renderBackground(x,y) {
 
 function renderPlayer(me) {
   context.drawImage(
-    getAsset('char_one/Char_down.png'),
+    getAsset('char_one/Char_' + me.direction +'.png'),
     me.x,
     me.y,
     PLAYER_RADIUS * 2,

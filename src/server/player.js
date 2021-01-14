@@ -24,8 +24,6 @@ class Player extends ObjectClass {
  
   update(dt) {
     //super.update(dt);
-    //console.log(this.toString());
-    //console.log("Player was updated from " + this.getX() + " " + this.getY());
     // Update score
     //this.score += dt * Constants.SCORE_PER_SECOND;
 
@@ -62,8 +60,7 @@ class Player extends ObjectClass {
   serializeForUpdate() {
     return {
       ...(super.serializeForUpdate()),
-      // x: this.x,
-      // y: this.y,
+      direction:this.direction
     };
   }
 

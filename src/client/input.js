@@ -9,39 +9,63 @@
 // }
 import { updateDirection } from './networking'
 
-let key = {a:false, s:false, d:false, w:false};
+let keys = [];
 
 function onKeyDown(e) //https://developer.mozilla.org/en-US/docs/Web/API/Document/keypress_event
 {
     // Detect which key was pressed - refer to keycodes https://keycode.info/
+    var key = 'down';
     if( e.key == 'w' ) { //W
-      key.w = true;
-      handleInput(false, 'up');
+      key = 'up';
     }  
     else if (e.key == 'a') { //A
-      key.a = true;
-      handleInput(false, 'left');
+      key = 'left';
     }
     else if (e.key == 's') { //S
-      key.s = true;
-      handleInput(false, 'down');
+      key = 'down';
     }
     else if (e.key == 'd') {
-      key.d = true;
-      handleInput(false, 'right');
+      key = 'right';
+    }
+    //Check if element is already in stack and push if not
+    let found = false;
+    for(var i = 0; i < keys.length; i++) {
+      if ( keys[i] == key ) { 
+        found = true;
+      }
+    }
+    if(!found) {
+      keys.push(key);
+      handleInput(false, key);
     }
 }
 
 function onKeyUp(e) {
-  if( e.key == 'w' ) //W
-    key.w = false;
-  else if (e.key == 'a') //A
-    key.a = false;
-  else if (e.key == 's') //S
-    key.s = false;
-  else if (e.key == 'd')
-    key.d = false;
-  handleInput(true, 'down');
+  var key = 'down';
+  if( e.key == 'w' ) { //W 
+    key = 'up';
+  }
+  else if (e.key == 'a') { //A
+    key = 'left'
+  }
+  else if (e.key == 's') { //S
+    key = 'down';
+  }
+  else if (e.key == 'd') {
+    key = 'right';
+  }
+  //Check for last button pressed
+  for(var i = 0; i < keys.length; i++) {
+    if ( keys[i] == key ) { 
+      keys.splice(i, 1); 
+    }
+  }
+  if(keys.length != 0) {
+    handleInput(false, keys[0]);
+  }
+  else {
+    handleInput(true, 'down');
+  }
 }
 
 function handleInput(idle, dir) {
