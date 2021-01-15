@@ -49,8 +49,8 @@ class Player extends ObjectClass {
 
 
     // Make sure the player stays in bounds
-    this.x = Math.max(0, Math.min(Constants.MAP_SIZE, this.x));
-    this.y = Math.max(0, Math.min(Constants.MAP_SIZE, this.y));
+    this.x = Math.max(0, Math.min(Constants.MAP_SIZE - 2 * Constants.PLAYER_RADIUS, this.x));
+    this.y = Math.max(0, Math.min(Constants.MAP_SIZE - 2 * Constants.PLAYER_RADIUS, this.y));
 
     //console.log("Player was updated to " + this.getX() + " " + this.getY());
     return null;

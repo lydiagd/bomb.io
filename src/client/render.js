@@ -13,7 +13,10 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 function render() {
-  const { me } = getCurrentState();
+  if(getCurrentState() == null) {
+    return;
+  }
+  const { me, bombs } = getCurrentState();
   if (!me) {
     console.log('Could not get me from server');
     return;
@@ -23,6 +26,9 @@ function render() {
 
   // Draw background
   renderBackground(me.x, me.y);
+
+  // Draw Bombs
+  bombs.forEach(renderBombs);
 
   // Draw all players
   renderPlayer(me);
@@ -42,18 +48,25 @@ export function stopRendering() {
 function renderBackground(x,y) {
   const backgroundX = MAP_SIZE / 2 - x + canvas.width / 2;
   const backgroundY = MAP_SIZE / 2 - y + canvas.height / 2;
-  const backgroundGradient = context.createRadialGradient(
-    backgroundX,
-    backgroundY,
-    MAP_SIZE / 10,
-    backgroundX,
-    backgroundY,
-    MAP_SIZE / 2,
+  context.drawImage(
+    getAsset('maps/Map1.png'),
+    0,
+    0,
+    MAP_SIZE,
+    MAP_SIZE,
   );
-  backgroundGradient.addColorStop(0, 'black');
-  backgroundGradient.addColorStop(1, 'gray');
-  context.fillStyle = backgroundGradient;
-  context.fillRect(0, 0, canvas.width, canvas.height);
+  // const backgroundGradient = context.createRadialGradient(
+  //   backgroundX,
+  //   backgroundY,
+  //   MAP_SIZE / 10,
+  //   backgroundX,
+  //   backgroundY,
+  //   MAP_SIZE / 2,
+  // );
+  // backgroundGradient.addColorStop(0, 'black');
+  // backgroundGradient.addColorStop(1, 'gray');
+  // context.fillStyle = backgroundGradient;
+  // context.fillRect(0, 0, canvas.width, canvas.height);
 }
 
 function renderPlayer(me) {
@@ -65,5 +78,20 @@ function renderPlayer(me) {
     PLAYER_RADIUS * 2,
   );
   context.restore();
-    
-  }
+  console.log('your player is at ' +  me.x + ' ' + me.y);
+}
+
+function renderBombs(bomb) {
+  context.drawImage(
+    getAsset('Bomb/Bomb.png'),
+    0,
+    0,
+    16,
+    16,
+    bomb.x,
+    bomb.y,
+    32,
+    32
+  );
+  context.restore();
+}

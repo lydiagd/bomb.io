@@ -1,6 +1,6 @@
 class Object {
   constructor(id, x, y) {
-    console.log("Object was created at " + x + " " + y);
+    //console.log("Object was created at " + x + " " + y);
     this.id = id;
     this.x = x;
     this.y = y;
@@ -16,11 +16,12 @@ class Object {
     this.y = obj.y;
   }
 
-  // distanceTo(object) {
-  //   const dx = this.x - object.x;
-  //   const dy = this.y - object.y;
-  //   return Math.sqrt(dx * dx + dy * dy);
-  // }
+  distanceTo(object) {
+    const dx = this.x - object.x;
+    const dy = this.y - object.y;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+
   getX() {
     return this.x;
   }

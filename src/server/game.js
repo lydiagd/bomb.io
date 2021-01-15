@@ -1,19 +1,21 @@
 const Constants = require('./constants');
 const Player = require('./player');
+const Bomb = require('./bomb');
 
 class Game {
   constructor() {
     this.sockets = {};
     this.players = {};
-    this.bullets = [];
+    this.bombs = [];
     this.lastUpdateTime = Date.now();
     this.shouldSendUpdate = false;
+    this.numPlayers = 0;
     setInterval(this.update.bind(this), 1000 / 60);
   }
 
   addPlayer(socket, username) {
     this.sockets[socket.id] = socket;
-
+    this.numPlayers++;
     // Generate a position to start this player at.
     const x = Constants.MAP_SIZE * (0.25 + Math.random() * 0.5);
     const y = Constants.MAP_SIZE * (0.25 + Math.random() * 0.5);
@@ -21,6 +23,7 @@ class Game {
   }
 
   removePlayer(socket) {
+    this.numPlayers--;
     delete this.sockets[socket.id];
     delete this.players[socket.id];
   }
@@ -48,10 +51,26 @@ class Game {
     Object.keys(this.sockets).forEach(playerID => {
       
       this.players[playerID].update(dt);
-
       //ENTER CODE NEEDED TO UPDATE EACH PLAYER
       //player.update(dt);
     });
+
+    //Update each bomb
+    const exploding = [];
+    for(let i = 0; i < this.bombs.length; i++ ) {
+      if(this.bombs[i].update(dt)) {
+        exploding.push(this.bombs[i]);
+      }
+    }
+    this.bombs = this.bombs.filter(bomb => !exploding.includes(bomb));
+
+    //Decide whether or not a new bomb should be spawned
+    if(this.numPlayers > 0 && Math.random()*50 < 1) {
+      const x = Constants.MAP_SIZE * (Math.random());
+      const y = Constants.MAP_SIZE * (Math.random());
+      //console.log('Spawned bomb at x:' + x + " y:" + y);
+      this.bombs.push(new Bomb(x,y));
+    }
 
     // Check if any players are dead
     Object.keys(this.sockets).forEach(playerID => {
@@ -99,7 +118,7 @@ class Game {
       t: Date.now(),
       me: player.serializeForUpdate(),
       others: nearbyPlayers.map(p => p.serializeForUpdate()),
-      // leaderboard,
+      bombs: this.bombs.map(b => b.serializeForUpdate()),
     };
   }
 }
